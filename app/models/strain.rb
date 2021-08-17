@@ -6,7 +6,7 @@ class Strain < ApplicationRecord
 
     validates :name, :category, :thc, :cbd, presence: true
 
-    scope :order_by_rating, -> {left_joins(:reviews).group(:id).order('avg(pot_leaves) desc')}
+    scope :order_by_rating, -> {left_joins(:reviews).group(:id).order('avg(rating) desc')}
 
     def self.alpha
         order(:name) 

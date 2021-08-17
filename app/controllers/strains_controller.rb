@@ -1,4 +1,7 @@
 class StrainsController < ApplicationController
+    before_action :redirect_if_not_logged_in
+    before_action :set_strain, only: [:show, :edit, :update] 
+
     def index   
         if params[:grower_id]
           grower = Grower.find(params[:grower_id])
@@ -51,6 +54,19 @@ class StrainsController < ApplicationController
 
     def strain_params
         params.require(:strain).permit(:name, :category, :thc, :cbd, :grower_id, grower_attributes: [:name])
+    end
+
+    def set_strain
+        @strain = Strain.find_by(id: params[:id])
+        redirect_to strains_path if !@strain 
+     end
+
+    def redirect_if_not_authorized 
+      if @strain.update(name: params[:name], category: params[:category], thc: params[:thc], cbd: params[:cbd])   
+        redirect_to strain_path(@strain)
+      else
+        redirect_to user_path(current_user)     
+      end 
     end
 
 
