@@ -20,8 +20,8 @@ class SessionsController < ApplicationController
 
     
     def destroy 
-        session.clear  
-        redirect_to '/'
+        session.delete("user_id")
+        redirect_to root_path
     end 
 
        
