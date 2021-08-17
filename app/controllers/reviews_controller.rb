@@ -33,7 +33,7 @@ class ReviewsController < ApplicationController
     private 
 
     def review_params
-        params.require(:review).permit(:strain_id, :form, :note, :pot_leaves)  
+        params.require(:review).permit(:strain_id, :form, :note, :rating)  
     end 
 
 end
