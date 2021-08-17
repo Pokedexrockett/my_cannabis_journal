@@ -10,6 +10,8 @@ class StrainsController < ApplicationController
     end
 
     def show 
+        @strain = Strain.find_by(id: params[:id])
+        @grower = @strain.growers.build(user_id:current_user.id)
     end
 
     def new 
